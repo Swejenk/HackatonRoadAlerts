@@ -1,0 +1,126 @@
+CREATE DATABASE VehicleAlerts;
+GO
+
+USE VehicleAlerts;
+GO
+
+CREATE TABLE Alerts (
+    Id INT PRIMARY KEY IDENTITY,
+    AlertType NVARCHAR(50),
+    Severity NVARCHAR(50),
+    CreatedDateTime DATETIME,
+    ReceivedDateTime DATETIME,
+    Vin NVARCHAR(50),
+    CustomerVehicleName NVARCHAR(100),
+    HrTotalVehicleDistance BIGINT,
+    TotalEngineHours FLOAT,
+    TotalElectricMotorHours FLOAT,
+    GenericTriggerType NVARCHAR(50),
+    TachoOutOfModeEventType NVARCHAR(50),
+    GeofenceName NVARCHAR(100),
+    GeofenceMessage NVARCHAR(255),
+    GeofenceEventType NVARCHAR(50),
+    SafetyZoneName NVARCHAR(100),
+    SafetyZoneEventType NVARCHAR(50),
+    SafetyZoneTopSpeed INT,
+    SafetyZoneOverspeedingReason NVARCHAR(100),
+    SafetyZoneDuration INT,
+    OverspeedTriggerType NVARCHAR(50),
+    OverspeedEventType NVARCHAR(50),
+    OverspeedWheelBasedSpeed FLOAT,
+    OverspeedLimit FLOAT,
+    IdlingEventType NVARCHAR(50),
+    IdlingAmbientAirTemperature INT,
+    IdlingAirProductionModulatorState NVARCHAR(50),
+    IdlingCoolantTemperature INT,
+    IdlingRegenerationFilterState NVARCHAR(50),
+    FuelLevelFuelLevel1 INT,
+    FuelLevelFuelLevel1ChangePercent INT,
+    CatalystFuelLevel INT,
+    CatalystFuelLevelChangePercent INT,
+    PtoId NVARCHAR(50),
+    PtoEventType NVARCHAR(50),
+    PtoBatteryLevel INT,
+    PtoAmbientAirTemperature INT,
+    PtoAirProductionModulatorState NVARCHAR(50),
+    PtoCoolantTemperature INT,
+    PtoRegenerationFilterState NVARCHAR(50),
+    ChargingStatusInfoEvent NVARCHAR(50),
+    ChargingStatusInfoEstimatedDistanceToEmptyTotal BIGINT,
+    ChargingStatusInfoEstimatedDistanceToEmptyFuel BIGINT,
+    ChargingStatusInfoEstimatedDistanceToEmptyGas BIGINT,
+    ChargingStatusInfoEstimatedDistanceToEmptyBatteryPack BIGINT,
+    ChargingStatusInfoHybridBatteryPackRemainingCharge INT,
+    ChargingStatusInfoEstimatedTimeBatteryPackChargingCompleted DATETIME,
+    ChargingConnectionStatusInfoEvent NVARCHAR(50),
+    ChargingConnectionStatusInfoEventDetail NVARCHAR(255)
+);
+GO
+
+CREATE TABLE DriverId (
+    AlertId INT,
+    TachoDriverIdentification BIGINT,
+    CardIssuingMemberState NVARCHAR(5),
+    DriverAuthenticationEquipment NVARCHAR(50),
+    CardReplacementIndex INT,
+    CardRenewalIndex INT,
+    OemDriverIdentificationIdType NVARCHAR(50),
+    OemDriverIdentification NVARCHAR(50),
+    FOREIGN KEY (AlertId) REFERENCES Alerts(Id)
+);
+GO
+
+CREATE TABLE GnssPosition (
+    AlertId INT,
+    Latitude FLOAT,
+    Longitude FLOAT,
+    Heading INT,
+    Altitude FLOAT,
+    Speed FLOAT,
+    PositionDateTime DATETIME,
+    FOREIGN KEY (AlertId) REFERENCES Alerts(Id)
+);
+GO
+
+CREATE TABLE Cargo (
+    AlertId INT,
+    CargoDefrostOn BIT,
+    CargoDoorOpen BIT,
+    CargoTemperatures NVARCHAR(MAX), -- För att lagra JSON-arrayen
+    FOREIGN KEY (AlertId) REFERENCES Alerts(Id)
+);
+GO
+
+CREATE TABLE Tpm (
+    AlertId INT,
+    Source NVARCHAR(50),
+    AxleId INT,
+    TireLocation NVARCHAR(50),
+    TpmActive BIT,
+    BatteryStatus NVARCHAR(50),
+    EventType NVARCHAR(50),
+    InformationEvent BIT,
+    LeakageWarning NVARCHAR(50),
+    Temperature FLOAT,
+    TemperatureStatus NVARCHAR(50),
+    PressureActual FLOAT,
+    PressureReference FLOAT,
+    PressureWarning NVARCHAR(50),
+    FOREIGN KEY (AlertId) REFERENCES Alerts(Id)
+);
+GO
+
+CREATE TABLE Ttm (
+    AlertId INT,
+    Source NVARCHAR(50),
+    AxleId INT,
+    TireLocation NVARCHAR(50),
+    TireActive BIT,
+    BatteryStatus NVARCHAR(50),
+    EventType NVARCHAR(50),
+    InformationEvent BIT,
+    TemperatureActual FLOAT,
+    TemperatureWarning NVARCHAR(50),
+    FOREIGN KEY (AlertId) REFERENCES Alerts(Id)
+);
+GO
