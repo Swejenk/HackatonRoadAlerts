@@ -16,5 +16,5 @@ GO
 
 INSERT INTO GnssPosition (AlertId, Latitude, Longitude, Heading, Altitude, Speed, PositionDateTime)
 VALUES
-(1, 57.71727, 11.921161, 30, 32, 54.5, '2025-10-22T14:39:03.606Z');
+(1, 60.560124, 15.583848, 30, 32, 54.5, '2025-10-22T14:39:03.606Z');
 GO
