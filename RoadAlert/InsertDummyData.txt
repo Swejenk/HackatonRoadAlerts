@@ -1,0 +1,20 @@
+INSERT INTO Alerts (AlertType, Severity, CreatedDateTime, ReceivedDateTime, Vin, CustomerVehicleName, HrTotalVehicleDistance, TotalEngineHours, TotalElectricMotorHours, GenericTriggerType)
+VALUES ('GENERIC', 'HIGH', '2025-10-22T14:39:03.606Z', '2025-10-22T14:39:03.606Z', 'ABC12345678901234', 'string', 34567891, 1234.3, 127.2, 'string');
+GO
+
+DECLARE @AlertId INT = SCOPE_IDENTITY();
+
+INSERT INTO DriverId (AlertId, TachoDriverIdentification, CardIssuingMemberState, DriverAuthenticationEquipment, CardReplacementIndex, CardRenewalIndex, OemDriverIdentificationIdType, OemDriverIdentification)
+VALUES (@AlertId, 12345678901234, 'S', 'DRIVER_CARD', 0, 0, 'USB', 'ABC-123-DEF');
+GO
+
+INSERT INTO Tpm (AlertId, Source, AxleId, TireLocation, TpmActive, BatteryStatus, EventType, InformationEvent, LeakageWarning, Temperature, TemperatureStatus, 
+                 PressureActual, PressureReference, PressureWarning)
+VALUES
+(1, 'TRUCK', 0, 'LEFT_INNER', 1, 'BATTERY_OK', 'PRESSURE_WARNING_STATUS_CHANGED', 1, 'NO_LEAKAGE', 23.5, 'HIGH_TEMP_WARNING', 0, 0, 'EXTREME_OVER_PRESSURE');
+GO
+
+INSERT INTO GnssPosition (AlertId, Latitude, Longitude, Heading, Altitude, Speed, PositionDateTime)
+VALUES
+(1, 57.71727, 11.921161, 30, 32, 54.5, '2025-10-22T14:39:03.606Z');
+GO
