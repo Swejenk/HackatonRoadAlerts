@@ -117,3 +117,4 @@ dist
 /.vs
 /RoadAlert/.vs/RoadAlert
 /RoadAlert/RoadAlertApi/obj
+/RoadAlert/RoadAlertApi/bin/Debug/net8.0
