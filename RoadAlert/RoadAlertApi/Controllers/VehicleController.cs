@@ -5,6 +5,7 @@ using RoadAlertApi.Models.Vehicles;
 
 namespace RoadAlertApi.Controllers
 {
+    [Route("vehicles")]
     public class VehicleController:Controller
     {
         private VehicleAlertsContext _dbContext;
@@ -14,6 +15,7 @@ namespace RoadAlertApi.Controllers
             _dbContext = dbContext;
         }
 
+        [HttpGet("stopped")]
         public IReadOnlyList<StoppedVehicle> Stopped()
         {
             var expr = from tpms in _dbContext.Tpms
@@ -24,7 +26,7 @@ namespace RoadAlertApi.Controllers
                 select new StoppedVehicle()
                 {
                     Lat = gps.Latitude.Value, Lon = gps.Longitude.Value, Heading = gps.Heading.Value,
-                    RegisteredAt = gps.PositionDateTime.Value
+                    RegisteredAt = gps.PositionDateTime.Value,Vin = gps.Alert.Vin
                 };
 
 
