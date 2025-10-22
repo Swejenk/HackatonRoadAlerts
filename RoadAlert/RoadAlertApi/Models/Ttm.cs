@@ -24,6 +24,7 @@ public partial class Ttm
     public double? TemperatureActual { get; set; }
 
     public string? TemperatureWarning { get; set; }
+    public string? Test { get; set; }
 
     public virtual Alert? Alert { get; set; }
 }
