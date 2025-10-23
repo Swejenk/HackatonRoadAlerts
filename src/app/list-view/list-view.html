@@ -1,0 +1,8 @@
+<div class="list-container">
+  @for (item of items; track item.title) {
+  <div class="list-item" (click)="zoomToItem(item)">
+    <h3>{{ item.title }}</h3>
+    <p>{{ item.description }}</p>
+  </div>
+  }
+</div>
