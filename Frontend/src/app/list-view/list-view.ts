@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-list-view',
@@ -7,15 +8,15 @@ import * as L from 'leaflet';
   templateUrl: './list-view.html',
   styleUrls: ['./list-view.scss'],
 })
-export class ListView {
+export class ListView implements OnInit {
   map!: L.Map;
+  private api = inject(ApiService);
 
-  items = [
-    { title: 'Accident', description: 'Item 1', coords: [59.3293, 18.0686] },
-    { title: 'Rainy day', description: 'Item 2', coords: [59.332, 18.064] },
-    { title: 'Roadblock', description: 'Item 3', coords: [59.327, 18.07] },
-    { title: 'Construction', description: 'Item 4', coords: [59.331, 18.072] },
-  ];
+  items = this.api.alerts;
+
+  ngOnInit(): void {
+   this.api.loadAlerts();
+ }
 
   setMap(map: L.Map) {
     this.map = map;
