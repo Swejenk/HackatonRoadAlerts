@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using RoadAlertApi.Models;
+
 namespace RoadAlertApi
 {
     public class Program
@@ -13,9 +16,15 @@ namespace RoadAlertApi
                 options.RespectBrowserAcceptHeader = true;
             });
 
+            builder.Services.AddDbContext<VehicleAlertsContext>(o => o.UseSqlServer("Server=.;Database=VehicleAlerts;Trusted_Connection=True;Encrypt=False;"));
+            builder.Services.AddControllers();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
 

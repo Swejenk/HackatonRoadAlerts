@@ -1,3 +1,5 @@
+
+
 INSERT INTO Alerts (AlertType, Severity, CreatedDateTime, ReceivedDateTime, Vin, CustomerVehicleName, HrTotalVehicleDistance, TotalEngineHours, TotalElectricMotorHours, GenericTriggerType)
 VALUES ('GENERIC', 'HIGH', '2025-10-22T14:39:03.606Z', '2025-10-22T14:39:03.606Z', 'ABC12345678901234', 'string', 34567891, 1234.3, 127.2, 'string');
 GO
@@ -16,5 +18,5 @@ GO
 
 INSERT INTO GnssPosition (AlertId, Latitude, Longitude, Heading, Altitude, Speed, PositionDateTime)
 VALUES
-(1, 60.560124, 15.583848, 30, 32, 54.5, '2025-10-22T14:39:03.606Z');
+(1, 60.560124, 15.583848, 30, 32, 8, '2025-10-22T14:39:03.606Z');
 GO
