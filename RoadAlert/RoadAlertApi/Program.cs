@@ -15,10 +15,9 @@ namespace RoadAlertApi
                 options.AddPolicy("AllowAngular",
                     policy =>
                     {
-                        policy.WithOrigins("http://localhost:4200")
+                        policy.WithOrigins("*")
                         .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .AllowCredentials();
+                        .AllowAnyMethod();
                     });
             });
 
@@ -42,7 +41,7 @@ namespace RoadAlertApi
             app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
-
+            app.UseCors();
             app.UseAuthorization();
 
 

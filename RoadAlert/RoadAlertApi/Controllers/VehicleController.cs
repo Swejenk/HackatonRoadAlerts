@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using RoadAlertApi.Models;
 using RoadAlertApi.Models.Vehicles;
@@ -22,6 +23,7 @@ namespace RoadAlertApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesContentSchema(typeof(IEnumerable<StoppedVehicle>), StatusCodes.Status200OK, "application/json")]
         [ProducesContentSchema(typeof(GeoJSON.Net.Feature.FeatureCollection), StatusCodes.Status200OK, "application/geo+json")]
+        [EnableCors(PolicyName ="AllowAngular")]
         public IActionResult Stopped()
         {
             var stoppedVehicles = 
