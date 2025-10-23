@@ -2,6 +2,8 @@ import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
 import { ListView } from './list-view/list-view';
 import OsmStreetview from './osm-streetview/osm-streetview';
+import { ApiService } from './services/api.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',

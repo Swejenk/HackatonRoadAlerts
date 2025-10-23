@@ -9,6 +9,18 @@ namespace RoadAlertApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngular",
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                    });
+            });
+
             // Add services to the container.
             builder.Services.AddDbContext<VehicleAlertsContext>(o => o.UseSqlServer("Server=.;Database=VehicleAlerts;Trusted_Connection=True;Encrypt=False;"));
             builder.Services.AddControllers();
