@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using RoadAlertApi.Models;
 using RoadAlertApi.Models.Vehicles;
+using RoadAlertApi.Tools;
 
 namespace RoadAlertApi.Controllers
 {
+    [ApiController]
     [Route("vehicles")]
     public class VehicleController:Controller
     {
@@ -16,9 +18,13 @@ namespace RoadAlertApi.Controllers
         }
 
         [HttpGet("stopped")]
-        public IReadOnlyList<StoppedVehicle> Stopped()
+        [Produces("application/json", "application/geo+json")]
+        [ProducesResponseType(typeof(IEnumerable<StoppedVehicle>), StatusCodes.Status200OK, "application/json")]
+        [ProducesResponseType(typeof(GeoJSON.Net.Feature.FeatureCollection), StatusCodes.Status200OK, "application/geo+json")]
+        public IActionResult Stopped()
         {
-            var expr = from tpms in _dbContext.Tpms
+            var stoppedVehicles = 
+                from tpms in _dbContext.Tpms
                 from gps in _dbContext.GnssPositions
                 where tpms.AlertId == gps.AlertId
                       && tpms.PressureActual < 140
@@ -29,10 +35,12 @@ namespace RoadAlertApi.Controllers
                     RegisteredAt = gps.PositionDateTime.Value,Vin = gps.Alert.Vin
                 };
 
+            if (Request.ContentType == "application/geo+json")
+            {
+                return Json(stoppedVehicles.ToGeoJsonFeatureCollection());
+            }
 
-            return expr.ToList();
-            //_dbContext.Tpms.Where(x=>x.PressureActual < 140)
-            //    .Join(x=>x.)
+            return Ok(stoppedVehicles.ToList());
         }
     }
 }
