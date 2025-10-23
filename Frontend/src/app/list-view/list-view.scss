@@ -1,0 +1,35 @@
+h3 {
+  margin: 10px;
+  color: #2a609d;
+  font-size: medium;
+  font-weight: 600;
+}
+
+p {
+  margin: 0px 10px;
+  color: #575757;
+  font-size: small;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; // space between items
+  padding: 10px;
+}
+
+.list-item {
+  margin: 30px 0px;
+  cursor: pointer; // shows the hand pointer
+  text-decoration: underline; // underlines the text
+  transition: color 0.2s, transform 0.2s;
+
+  &:hover {
+    color: #007bff; // optional: highlight on hover
+    transform: translateX(2px); // subtle shift to show interactivity
+  }
+}
+
+* {
+  font-family: 'Volvo Novum', 'Noto Sans', system-ui;
+}
