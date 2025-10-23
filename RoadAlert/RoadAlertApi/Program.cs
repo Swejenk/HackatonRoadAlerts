@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using RoadAlertApi.Controllers;
 using RoadAlertApi.Models;
 
 namespace RoadAlertApi
@@ -17,9 +18,11 @@ namespace RoadAlertApi
             });
 
             builder.Services.AddDbContext<VehicleAlertsContext>(o => o.UseSqlServer("Server=.;Database=VehicleAlerts;Trusted_Connection=True;Encrypt=False;"));
-            builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                //c.OperationFilter<DistinguishContentTypesFilter>();
+            }); 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

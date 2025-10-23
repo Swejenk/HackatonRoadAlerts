@@ -20,7 +20,7 @@ namespace RoadAlertApi.Controllers
         [HttpGet("stopped")]
         [Produces("application/json", "application/geo+json")]
         [ProducesResponseType(typeof(IEnumerable<StoppedVehicle>), StatusCodes.Status200OK, "application/json")]
-        [ProducesResponseType(typeof(GeoJSON.Net.Feature.FeatureCollection), StatusCodes.Status200OK, "application/geo+json")]
+        [ProducesResponseType(typeof(GeoJSON.Net.Feature.FeatureCollection), StatusCodes.Status226IMUsed, "application/geo+json")]
         public IActionResult Stopped()
         {
             var stoppedVehicles = 
