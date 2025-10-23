@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using RoadAlertApi.Controllers;
 using RoadAlertApi.Models;
+using RoadAlertApi.Tools;
 
 namespace RoadAlertApi
 {
@@ -21,7 +21,7 @@ namespace RoadAlertApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
-                //c.OperationFilter<DistinguishContentTypesFilter>();
+                c.OperationFilter<ProducesContentSchemaFilter>();
             }); 
             var app = builder.Build();
 
